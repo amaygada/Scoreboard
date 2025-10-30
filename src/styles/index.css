@@ -1,0 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    font-family: "Inter", sans-serif;
+    /* Remove oklch() wrapper - just keep the values */
+    --color-primary: 44.12% 0.18 274.81;
+    --color-accent: 53.88% 0.166 146.08;
+    --color-background: 97.06% 0.003 110.42;
+    --color-border: 93.44% 0.009 29.23;
+    --color-highlight: 73.15% 0.232 73.77;
+    --color-text: 29.37% 0.032 29.03;
+    --color-plain: 100% 0 0;
+    --color-alert: 56.6% 0.245 29.23;
+  }
+}
