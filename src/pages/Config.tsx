@@ -4,7 +4,7 @@ import { Button } from "../components/Button";
 
 export default function Config() {
   const [form, setForm] = useState<LiveScoreRow>({
-    turf_id: 1,
+    id: 1,
     team1_name: "",
     team2_name: "",
     runs: null,
@@ -27,14 +27,27 @@ export default function Config() {
     try {
       const payload: LiveScoreRow = { ...form };
 
-      // Ensure only one row per turf by upserting on turf_id
-      const { data, error } = await supabase
+      // First try to update existing row by primary key id
+      const { data: updated, error: updateError } = await supabase
         .from(SCORE_TABLE_NAME)
-        .upsert(payload, { onConflict: "turf_id" })
+        .update(payload)
+        .eq("id", payload.id)
         .select()
-        .single();
-      if (error) throw error;
-      setMessage("Saved");
+        .maybeSingle();
+      if (updateError) throw updateError;
+
+      if (updated) {
+        setMessage("Saved");
+      } else {
+        // If no row existed, insert a new one
+        const { error: insertError } = await supabase
+          .from(SCORE_TABLE_NAME)
+          .insert(payload)
+          .select()
+          .single();
+        if (insertError) throw insertError;
+        setMessage("Saved");
+      }
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : String(err);
       setMessage(`Error: ${msg}`);
@@ -43,7 +56,7 @@ export default function Config() {
     }
   }
 
-  // Prefill form when turf_id changes by fetching existing row
+  // Prefill form when id changes by fetching existing row
   useEffect(() => {
     let cancelled = false;
     async function fetchExisting() {
@@ -51,7 +64,7 @@ export default function Config() {
       const { data } = await supabase
         .from(SCORE_TABLE_NAME)
         .select("*")
-        .eq("turf_id", form.turf_id)
+        .eq("id", form.id)
         .maybeSingle();
 
       if (!cancelled && data) {
@@ -62,12 +75,12 @@ export default function Config() {
     return () => {
       cancelled = true;
     };
-  }, [form.turf_id]);
+  }, [form.id]);
 
   return (
     <div className="max-w-2xl mx-auto p-6">
       <h1 className="text-2xl font-semibold">Live Score Config</h1>
-      <p className="mt-1 text-slate-600">Enter current match details and live score. This writes to Supabase table <span className="font-mono">{SCORE_TABLE_NAME}</span>.</p>
+      <p className="mt-1 text-slate-600">Enter current match details and live scorese</p>
 
       {!isReady && (
         <div className="mt-4 rounded-md border border-amber-300 bg-amber-50 p-3 text-amber-800">
@@ -79,8 +92,8 @@ export default function Config() {
         <label className="block">
           <span className="text-sm text-slate-600">Turf ID</span>
           <select
-            value={form.turf_id}
-            onChange={(e) => updateField("turf_id", Number(e.target.value))}
+            value={form.id}
+            onChange={(e) => updateField("id", Number(e.target.value))}
             className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 focus:border-primary focus:outline-none bg-white"
           >
             <option value={1}>1</option>

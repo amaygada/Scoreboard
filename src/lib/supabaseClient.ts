@@ -16,8 +16,7 @@ if (!supabaseUrl || !supabaseAnonKey) {
 export const supabase = createClient(supabaseUrl ?? "", supabaseAnonKey ?? "");
 
 export type LiveScoreRow = {
-  id?: number;
-  turf_id: number; // one row per turf
+  id: number; // primary key, used as turf identifier in UI
   team1_name: string;
   team2_name: string;
   runs: number | null;

@@ -21,13 +21,10 @@
     "dist"
   ],
   "scripts": {
-    "build:css": "npx tailwindcss -i ./src/styles/index.css -o ./dist/styles/index.css --minify",
-    "build:lib": "tsup",
-    "build": "npm run build:css && npm run build:lib",
-    "dev": "tsup --watch",
-    "dev:app": "vite",
-    "build:app": "vite build",
-    "preview:app": "vite preview --port 5173"
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
   },
   "peerDependencies": {
     "@heroicons/react": "^2.2.0",

@@ -25,7 +25,7 @@ export default function ScoreboardPage() {
       const { data, error: err } = await supabase
         .from(SCORE_TABLE_NAME)
         .select("*")
-        .eq("turf_id", id)
+        .eq("id", id)
         .maybeSingle();
 
       if (!cancelled) {
