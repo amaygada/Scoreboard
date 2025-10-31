@@ -62,6 +62,16 @@ export default function Config() {
     setTimeout(() => setLastAction(""), 2000);
   }
 
+  // Remove runs
+  function removeRuns(amount: number) {
+    setForm((prev) => ({
+      ...prev,
+      runs: Math.max((prev.runs ?? 0) - amount, 0),
+    }));
+    setLastAction(`-${amount} run${amount > 1 ? "s" : ""}`);
+    setTimeout(() => setLastAction(""), 2000);
+  }
+
   // Add wickets
   function addWicket() {
     setForm((prev) => ({
@@ -284,6 +294,30 @@ export default function Config() {
           </label>
         </div>
 
+        {/* Team Names */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
+          <label className="block">
+            <span className="text-xs sm:text-sm font-medium text-slate-700">Team 1 Name</span>
+            <input
+              type="text"
+              value={form.team1_name}
+              onChange={(e) => updateField("team1_name", e.target.value)}
+              className="mt-1 w-full rounded-md border border-slate-300 px-2 sm:px-3 py-1.5 sm:py-2.5 text-sm sm:text-base focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+              placeholder="Team 1"
+            />
+          </label>
+          <label className="block">
+            <span className="text-xs sm:text-sm font-medium text-slate-700">Team 2 Name</span>
+            <input
+              type="text"
+              value={form.team2_name}
+              onChange={(e) => updateField("team2_name", e.target.value)}
+              className="mt-1 w-full rounded-md border border-slate-300 px-2 sm:px-3 py-1.5 sm:py-2.5 text-sm sm:text-base focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+              placeholder="Team 2"
+            />
+          </label>
+        </div>
+
         {/* Quick Actions Section - Runs */}
         <div className="space-y-2 sm:space-y-4">
           <h2 className="text-base sm:text-lg font-semibold text-slate-800 border-b border-slate-200 pb-1 sm:pb-2">Quick Actions</h2>
@@ -352,6 +386,60 @@ export default function Config() {
                 +6
               </Button>
             </div>
+
+            {/* Subtract Runs Section */}
+            <div className="pt-1 sm:pt-2 border-t border-slate-200">
+              <div className="grid grid-cols-6 gap-1.5 sm:gap-2">
+                <Button
+                  onClick={() => removeRuns(1)}
+                  variant="primarylite"
+                  size="lg"
+                  className="text-sm sm:text-lg font-bold py-2 sm:py-4 min-h-[44px] sm:min-h-[56px]"
+                >
+                  -1
+                </Button>
+                <Button
+                  onClick={() => removeRuns(2)}
+                  variant="primarylite"
+                  size="lg"
+                  className="text-sm sm:text-lg font-bold py-2 sm:py-4 min-h-[44px] sm:min-h-[56px]"
+                >
+                  -2
+                </Button>
+                <Button
+                  onClick={() => removeRuns(3)}
+                  variant="primarylite"
+                  size="lg"
+                  className="text-sm sm:text-lg font-bold py-2 sm:py-4 min-h-[44px] sm:min-h-[56px]"
+                >
+                  -3
+                </Button>
+                <Button
+                  onClick={() => removeRuns(4)}
+                  variant="primarylite"
+                  size="lg"
+                  className="text-sm sm:text-lg font-bold py-2 sm:py-4 min-h-[44px] sm:min-h-[56px]"
+                >
+                  -4
+                </Button>
+                <Button
+                  onClick={() => removeRuns(5)}
+                  variant="primarylite"
+                  size="lg"
+                  className="text-sm sm:text-lg font-bold py-2 sm:py-4 min-h-[44px] sm:min-h-[56px]"
+                >
+                  -5
+                </Button>
+                <Button
+                  onClick={() => removeRuns(6)}
+                  variant="primarylite"
+                  size="lg"
+                  className="text-sm sm:text-lg font-bold py-2 sm:py-4 min-h-[44px] sm:min-h-[56px]"
+                >
+                  -6
+                </Button>
+              </div>
+            </div>
           </div>
 
           {/* Quick Actions - Wickets */}
@@ -401,7 +489,7 @@ export default function Config() {
           {/* Quick Actions - Overs */}
           <div className="space-y-2 pt-1 sm:pt-2">
             <div className="flex items-center gap-1.5 sm:gap-2">
-              <span className="text-xs sm:text-sm font-medium text-slate-700 flex-1">Overs: <span className="text-base sm:text-lg font-bold text-primary">{formatOvers(form.overs)}</span></span>
+              <span className="text-xs sm:text-sm font-medium text-slate-700 flex-1">Overs: <span className="text-base sm:text-lg font-bold text-highlight">{formatOvers(form.overs)}</span></span>
               <input
                 type="text"
                 value={formatOvers(form.overs)}
@@ -440,47 +528,20 @@ export default function Config() {
               </Button>
               <Button
                 onClick={() => addBalls(6)}
-                variant="primarylite"
+                variant="secondary"
                 size="lg"
                 className="text-xs sm:text-base font-semibold py-1.5 sm:py-4 min-h-[36px] sm:min-h-[56px]"
               >
                 +1 Over
               </Button>
             </div>
-            
-            <div className="grid grid-cols-3 gap-1 sm:gap-2">
-              <Button
-                onClick={() => addBalls(3)}
-                variant="secondary"
-                size="lg"
-                className="text-xs sm:text-base font-semibold py-1.5 sm:py-4 min-h-[36px] sm:min-h-[56px]"
-              >
-                +3 Balls
-              </Button>
-              <Button
-                onClick={() => addBalls(4)}
-                variant="secondary"
-                size="lg"
-                className="text-xs sm:text-base font-semibold py-1.5 sm:py-4 min-h-[36px] sm:min-h-[56px]"
-              >
-                +4 Balls
-              </Button>
-              <Button
-                onClick={() => addBalls(5)}
-                variant="secondary"
-                size="lg"
-                className="text-xs sm:text-base font-semibold py-1.5 sm:py-4 min-h-[36px] sm:min-h-[56px]"
-              >
-                +5 Balls
-              </Button>
-            </div>
 
             {/* Subtract Balls Section */}
             <div className="pt-1 sm:pt-2 border-t border-slate-200">
-              <div className="grid grid-cols-3 gap-1 sm:gap-2 mb-1 sm:mb-2">
+              <div className="grid grid-cols-3 gap-1 sm:gap-2">
                 <Button
                   onClick={() => removeBalls(1)}
-                  variant="dangerlite"
+                  variant="secondarylite"
                   size="lg"
                   className="text-xs sm:text-base font-semibold py-1.5 sm:py-4 min-h-[36px] sm:min-h-[56px]"
                 >
@@ -488,7 +549,7 @@ export default function Config() {
                 </Button>
                 <Button
                   onClick={() => removeBalls(2)}
-                  variant="dangerlite"
+                  variant="secondarylite"
                   size="lg"
                   className="text-xs sm:text-base font-semibold py-1.5 sm:py-4 min-h-[36px] sm:min-h-[56px]"
                 >
@@ -496,38 +557,11 @@ export default function Config() {
                 </Button>
                 <Button
                   onClick={() => removeBalls(6)}
-                  variant="danger"
+                  variant="secondarylite"
                   size="lg"
                   className="text-xs sm:text-base font-semibold py-1.5 sm:py-4 min-h-[36px] sm:min-h-[56px]"
                 >
                   -1 Over
-                </Button>
-              </div>
-              
-              <div className="grid grid-cols-3 gap-1 sm:gap-2">
-                <Button
-                  onClick={() => removeBalls(3)}
-                  variant="dangerlite"
-                  size="lg"
-                  className="text-xs sm:text-base font-semibold py-1.5 sm:py-4 min-h-[36px] sm:min-h-[56px]"
-                >
-                  -3 Balls
-                </Button>
-                <Button
-                  onClick={() => removeBalls(4)}
-                  variant="dangerlite"
-                  size="lg"
-                  className="text-xs sm:text-base font-semibold py-1.5 sm:py-4 min-h-[36px] sm:min-h-[56px]"
-                >
-                  -4 Balls
-                </Button>
-                <Button
-                  onClick={() => removeBalls(5)}
-                  variant="dangerlite"
-                  size="lg"
-                  className="text-xs sm:text-base font-semibold py-1.5 sm:py-4 min-h-[36px] sm:min-h-[56px]"
-                >
-                  -5 Balls
                 </Button>
               </div>
             </div>
