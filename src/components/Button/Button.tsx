@@ -46,6 +46,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         "bg-alert/10 text-alert hover:bg-alert/20 transition cursor-pointer",
       secondarylite:
         "bg-text/10 text-text hover:bg-text/20 transition cursor-pointer",
+      successlite:
+        "bg-accent/10 text-accent hover:bg-accent/20 transition cursor-pointer",
     };
 
     const sizes = {

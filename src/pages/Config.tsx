@@ -256,26 +256,31 @@ export default function Config() {
   }, [form.id]);
 
   return (
-    <div className="max-w-2xl mx-auto p-3 sm:p-6 pb-4 sm:pb-8">
-      <h1 className="text-lg sm:text-2xl font-semibold">Live Score Config</h1>
-      <p className="mt-0.5 text-xs sm:text-base text-slate-600">Enter current match details and live scores</p>
-
-      {!isReady && (
-        <div className="mt-4 rounded-md border border-amber-300 bg-amber-50 p-3 text-amber-800 text-sm">
-          Missing Supabase env vars. Define <span className="font-mono">VITE_SUPABASE_URL</span> and <span className="font-mono">VITE_SUPABASE_ANON_KEY</span>.
-        </div>
-      )}
-
-      {/* Status message */}
-      {(message || lastAction) && (
-        <div className={`mt-3 px-4 py-2 rounded-md text-sm font-medium ${
-          message.includes("Error") 
-            ? "bg-red-50 text-red-700 border border-red-200" 
-            : "bg-green-50 text-green-700 border border-green-200"
+    <>
+      {/* Toast Notification */}
+      {message && (
+        <div className={`fixed inset-0 flex items-center justify-center pointer-events-none z-50 animate-fade-in-out ${
+          message.includes("Error") ? "text-red-700" : "text-green-700"
         }`}>
-          {message || lastAction}
+          <div className={`px-6 py-3 rounded-lg text-base font-medium shadow-2xl transform scale-100 transition-all ${
+            message.includes("Error") 
+              ? "bg-red-50 border border-red-200" 
+              : "bg-green-50 border border-green-200"
+          }`}>
+            {message}
+          </div>
         </div>
       )}
+
+      <div className="max-w-2xl mx-auto p-3 sm:p-6 pb-4 sm:pb-8">
+        <h1 className="text-lg sm:text-2xl font-semibold">Live Score Config</h1>
+        <p className="mt-0.5 text-xs sm:text-base text-slate-600">Enter current match details and live scores</p>
+
+        {!isReady && (
+          <div className="mt-4 rounded-md border border-amber-300 bg-amber-50 p-3 text-amber-800 text-sm">
+            Missing Supabase env vars. Define <span className="font-mono">VITE_SUPABASE_URL</span> and <span className="font-mono">VITE_SUPABASE_ANON_KEY</span>.
+          </div>
+        )}
 
       <div className="mt-3 sm:mt-6 grid grid-cols-1 gap-3 sm:gap-6">
         {/* Turf ID Selector */}
@@ -295,27 +300,40 @@ export default function Config() {
         </div>
 
         {/* Team Names */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
-          <label className="block">
-            <span className="text-xs sm:text-sm font-medium text-slate-700">Team 1 Name</span>
-            <input
-              type="text"
-              value={form.team1_name}
-              onChange={(e) => updateField("team1_name", e.target.value)}
-              className="mt-1 w-full rounded-md border border-slate-300 px-2 sm:px-3 py-1.5 sm:py-2.5 text-sm sm:text-base focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
-              placeholder="Team 1"
-            />
-          </label>
-          <label className="block">
-            <span className="text-xs sm:text-sm font-medium text-slate-700">Team 2 Name</span>
-            <input
-              type="text"
-              value={form.team2_name}
-              onChange={(e) => updateField("team2_name", e.target.value)}
-              className="mt-1 w-full rounded-md border border-slate-300 px-2 sm:px-3 py-1.5 sm:py-2.5 text-sm sm:text-base focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
-              placeholder="Team 2"
-            />
-          </label>
+        <div className="space-y-2 sm:space-y-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
+            <label className="block">
+              <span className="text-xs sm:text-sm font-medium text-slate-700">Team 1 Name</span>
+              <input
+                type="text"
+                value={form.team1_name}
+                onChange={(e) => updateField("team1_name", e.target.value)}
+                className="mt-1 w-full rounded-md border border-slate-300 px-2 sm:px-3 py-1.5 sm:py-2.5 text-sm sm:text-base focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                placeholder="Team 1"
+              />
+            </label>
+            <label className="block">
+              <span className="text-xs sm:text-sm font-medium text-slate-700">Team 2 Name</span>
+              <input
+                type="text"
+                value={form.team2_name}
+                onChange={(e) => updateField("team2_name", e.target.value)}
+                className="mt-1 w-full rounded-md border border-slate-300 px-2 sm:px-3 py-1.5 sm:py-2.5 text-sm sm:text-base focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                placeholder="Team 2"
+              />
+            </label>
+          </div>
+          <div className="flex justify-center">
+            <Button
+              onClick={quickSave}
+              variant="successlite"
+              size="sm"
+              disabled={loading}
+              className="min-w-[100%] sm:min-w-[100%] text-xs sm:text-sm py-1.5 sm:py-2"
+            >
+              Save Team Names
+            </Button>
+          </div>
         </div>
 
         {/* Quick Actions Section - Runs */}
@@ -335,7 +353,7 @@ export default function Config() {
               />
               <Button
                 onClick={quickSave}
-                variant="success"
+                variant="successlite"
                 size="sm"
                 disabled={loading}
                 className="min-w-[70px] sm:min-w-[80px] text-xs sm:text-sm py-1.5 sm:py-2"
@@ -344,7 +362,7 @@ export default function Config() {
               </Button>
             </div>
             
-            <div className="grid grid-cols-5 gap-1.5 sm:gap-2">
+            <div className="grid grid-cols-5 gap-3 sm:gap-3">
               <Button
                 onClick={() => addRuns(1)}
                 variant="primary"
@@ -387,7 +405,7 @@ export default function Config() {
               </Button>
             </div>
 
-            <div className="grid grid-cols-5 gap-1.5 sm:gap-2">
+            <div className="grid grid-cols-5 gap-3 sm:gap-3">
               <Button
                 onClick={() => removeRuns(1)}
                 variant="primarylite"
@@ -432,7 +450,7 @@ export default function Config() {
           </div>
 
           {/* Quick Actions - Wickets */}
-          <div className="space-y-2 pt-1 sm:pt-2">
+          <div className="space-y-2 pt-3 sm:pt-4 border-t border-slate-200/50">
             <div className="flex items-center gap-1.5 sm:gap-2">
               <span className="text-xs sm:text-sm font-medium text-slate-700 flex-1">Wickets: <span className="text-base sm:text-lg font-bold text-alert">{form.wickets ?? 0}</span> / 10</span>
               <input
@@ -446,7 +464,7 @@ export default function Config() {
               />
               <Button
                 onClick={quickSave}
-                variant="success"
+                variant="successlite"
                 size="sm"
                 disabled={loading}
                 className="min-w-[70px] sm:min-w-[80px] text-xs sm:text-sm py-1.5 sm:py-2"
@@ -476,7 +494,7 @@ export default function Config() {
           </div>
 
           {/* Quick Actions - Overs */}
-          <div className="space-y-2 pt-1 sm:pt-2">
+          <div className="space-y-2 pt-3 sm:pt-4 border-t border-slate-200/50">
             <div className="flex items-center gap-1.5 sm:gap-2">
               <span className="text-xs sm:text-sm font-medium text-slate-700 flex-1">Overs: <span className="text-base sm:text-lg font-bold text-highlight">{formatOvers(form.overs)}</span></span>
               <input
@@ -489,7 +507,7 @@ export default function Config() {
               />
               <Button
                 onClick={quickSave}
-                variant="success"
+                variant="successlite"
                 size="sm"
                 disabled={loading}
                 className="min-w-[70px] sm:min-w-[80px] text-xs sm:text-sm py-1.5 sm:py-2"
@@ -557,8 +575,33 @@ export default function Config() {
           </div>
         </div>
 
+        {/* Quick Actions - Target */}
+        <div className="space-y-2 pt-3 sm:pt-4 border-t border-slate-200/50">
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            <span className="text-xs sm:text-sm font-medium text-slate-700 flex-1">Target: <span className="text-base sm:text-lg font-bold text-primary">{form.Target ?? 0}</span></span>
+            <input
+              type="number"
+              value={form.Target ?? ""}
+              onChange={(e) => updateField("Target", e.target.value === "" ? null : Number(e.target.value))}
+              className="w-20 sm:w-24 rounded-md border border-slate-300 px-1.5 sm:px-2 py-1.5 sm:py-2 text-center text-sm sm:text-base focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+              min={0}
+              placeholder="0"
+            />
+            <Button
+              onClick={quickSave}
+              variant="successlite"
+              size="sm"
+              disabled={loading}
+              className="min-w-[70px] sm:min-w-[80px] text-xs sm:text-sm py-1.5 sm:py-2"
+            >
+              Save
+            </Button>
+          </div>
+        </div>
+
       </div>
     </div>
+    </>
   );
 }
 

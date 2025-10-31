@@ -23,21 +23,21 @@ export function Scoreboard({ matchTitle, score, overs, target, tournamentLogoSrc
             </div>
             <div className="flex-1 bg-[#3f3f3f] text-white pt-36">
                 <div className="flex h-full flex-col justify-between">
-                    <div className="grid grid-cols-1 gap-8 px-6 py-10 md:grid-cols-3 md:items-start">
+                    <div className="grid grid-cols-1 gap-8 px-6 py-10 md:grid-cols-[2fr_1fr_1fr] md:items-start">
                         <div className="text-center">
-                            <div className="text-3xl font-bold tracking-wide md:text-[96px]">SCORE</div>
+                            <div className="text-3xl font-bold tracking-wide md:text-[84px]">SCORE</div>
                             <div className="mt-3 text-[64px] font-extrabold leading-none md:text-[260px]">
                                 {score.runs}/{score.wickets}
                             </div>
                         </div>
                         <div className="text-center">
-                            <div className="text-3xl font-bold tracking-wide md:text-[96px]">OVERS</div>
+                            <div className="text-3xl font-bold tracking-wide md:text-[84px]">OVERS</div>
                             <div className="mt-3 text-[64px] font-extrabold leading-none md:text-[260px]">
                                 {overs}
                             </div>
                         </div>
                         <div className="text-center">
-                            <div className="text-3xl font-bold tracking-wide text-yellow-300 md:text-[96px]">TARGET</div>
+                            <div className="text-3xl font-bold tracking-wide text-yellow-300 md:text-[84px]">TARGET</div>
                             <div className="mt-3 text-[64px] font-extrabold leading-none text-yellow-300 md:text-[260px]">
                                 {target}
                             </div>

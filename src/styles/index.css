@@ -18,3 +18,20 @@
     --color-alert: 56.6% 0.245 29.23;
   }
 }
+
+@layer utilities {
+  @keyframes fade-in-out {
+    0%, 100% {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    10%, 90% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  .animate-fade-in-out {
+    animation: fade-in-out 0.5s ease-in-out;
+  }
+}
