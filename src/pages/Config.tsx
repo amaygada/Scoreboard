@@ -387,58 +387,47 @@ export default function Config() {
               </Button>
             </div>
 
-            {/* Subtract Runs Section */}
-            <div className="pt-1 sm:pt-2 border-t border-slate-200">
-              <div className="grid grid-cols-6 gap-1.5 sm:gap-2">
-                <Button
-                  onClick={() => removeRuns(1)}
-                  variant="primarylite"
-                  size="lg"
-                  className="text-sm sm:text-lg font-bold py-2 sm:py-4 min-h-[44px] sm:min-h-[56px]"
-                >
-                  -1
-                </Button>
-                <Button
-                  onClick={() => removeRuns(2)}
-                  variant="primarylite"
-                  size="lg"
-                  className="text-sm sm:text-lg font-bold py-2 sm:py-4 min-h-[44px] sm:min-h-[56px]"
-                >
-                  -2
-                </Button>
-                <Button
-                  onClick={() => removeRuns(3)}
-                  variant="primarylite"
-                  size="lg"
-                  className="text-sm sm:text-lg font-bold py-2 sm:py-4 min-h-[44px] sm:min-h-[56px]"
-                >
-                  -3
-                </Button>
-                <Button
-                  onClick={() => removeRuns(4)}
-                  variant="primarylite"
-                  size="lg"
-                  className="text-sm sm:text-lg font-bold py-2 sm:py-4 min-h-[44px] sm:min-h-[56px]"
-                >
-                  -4
-                </Button>
-                <Button
-                  onClick={() => removeRuns(5)}
-                  variant="primarylite"
-                  size="lg"
-                  className="text-sm sm:text-lg font-bold py-2 sm:py-4 min-h-[44px] sm:min-h-[56px]"
-                >
-                  -5
-                </Button>
-                <Button
-                  onClick={() => removeRuns(6)}
-                  variant="primarylite"
-                  size="lg"
-                  className="text-sm sm:text-lg font-bold py-2 sm:py-4 min-h-[44px] sm:min-h-[56px]"
-                >
-                  -6
-                </Button>
-              </div>
+            <div className="grid grid-cols-5 gap-1.5 sm:gap-2">
+              <Button
+                onClick={() => removeRuns(1)}
+                variant="primarylite"
+                size="lg"
+                className="text-sm sm:text-lg font-bold py-2 sm:py-4 min-h-[44px] sm:min-h-[56px]"
+              >
+                -1
+              </Button>
+              <Button
+                onClick={() => removeRuns(2)}
+                variant="primarylite"
+                size="lg"
+                className="text-sm sm:text-lg font-bold py-2 sm:py-4 min-h-[44px] sm:min-h-[56px]"
+              >
+                -2
+              </Button>
+              <Button
+                onClick={() => removeRuns(3)}
+                variant="primarylite"
+                size="lg"
+                className="text-sm sm:text-lg font-bold py-2 sm:py-4 min-h-[44px] sm:min-h-[56px]"
+              >
+                -3
+              </Button>
+              <Button
+                onClick={() => removeRuns(4)}
+                variant="primarylite"
+                size="lg"
+                className="text-sm sm:text-lg font-bold py-2 sm:py-4 min-h-[44px] sm:min-h-[56px]"
+              >
+                -4
+              </Button>
+              <Button
+                onClick={() => removeRuns(6)}
+                variant="primarylite"
+                size="lg"
+                className="text-sm sm:text-lg font-bold py-2 sm:py-4 min-h-[44px] sm:min-h-[56px]"
+              >
+                -6
+              </Button>
             </div>
           </div>
 
