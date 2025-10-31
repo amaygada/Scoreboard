@@ -246,9 +246,9 @@ export default function Config() {
   }, [form.id]);
 
   return (
-    <div className="max-w-2xl mx-auto p-4 sm:p-6 pb-8">
-      <h1 className="text-xl sm:text-2xl font-semibold">Live Score Config</h1>
-      <p className="mt-1 text-sm sm:text-base text-slate-600">Enter current match details and live scores</p>
+    <div className="max-w-2xl mx-auto p-3 sm:p-6 pb-4 sm:pb-8">
+      <h1 className="text-lg sm:text-2xl font-semibold">Live Score Config</h1>
+      <p className="mt-0.5 text-xs sm:text-base text-slate-600">Enter current match details and live scores</p>
 
       {!isReady && (
         <div className="mt-4 rounded-md border border-amber-300 bg-amber-50 p-3 text-amber-800 text-sm">
@@ -267,15 +267,15 @@ export default function Config() {
         </div>
       )}
 
-      <div className="mt-6 grid grid-cols-1 gap-6">
+      <div className="mt-3 sm:mt-6 grid grid-cols-1 gap-3 sm:gap-6">
         {/* Turf ID Selector */}
-        <div className="space-y-2">
+        <div className="space-y-1">
           <label className="block">
-            <span className="text-sm font-medium text-slate-700">Turf ID</span>
+            <span className="text-xs sm:text-sm font-medium text-slate-700">Turf ID</span>
             <select
               value={form.id}
               onChange={(e) => updateField("id", Number(e.target.value))}
-              className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2.5 text-base focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 bg-white"
+              className="mt-1 w-full rounded-md border border-slate-300 px-2 sm:px-3 py-1.5 sm:py-2.5 text-sm sm:text-base focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 bg-white"
             >
               <option value={1}>1</option>
               <option value={2}>2</option>
@@ -285,37 +285,37 @@ export default function Config() {
         </div>
 
         {/* Quick Actions Section - Runs */}
-        <div className="space-y-4">
-          <h2 className="text-lg font-semibold text-slate-800 border-b border-slate-200 pb-2">Quick Actions</h2>
+        <div className="space-y-2 sm:space-y-4">
+          <h2 className="text-base sm:text-lg font-semibold text-slate-800 border-b border-slate-200 pb-1 sm:pb-2">Quick Actions</h2>
           
-          <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <span className="text-sm font-medium text-slate-700 flex-1">Runs: <span className="text-lg font-bold text-primary">{form.runs ?? 0}</span></span>
+          <div className="space-y-2">
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <span className="text-xs sm:text-sm font-medium text-slate-700 flex-1">Runs: <span className="text-base sm:text-lg font-bold text-primary">{form.runs ?? 0}</span></span>
               <input
                 type="number"
                 value={form.runs ?? ""}
                 onChange={(e) => updateField("runs", e.target.value === "" ? null : Number(e.target.value))}
-                className="w-24 rounded-md border border-slate-300 px-2 py-2 text-center text-base focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                className="w-20 sm:w-24 rounded-md border border-slate-300 px-1.5 sm:px-2 py-1.5 sm:py-2 text-center text-sm sm:text-base focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
                 min={0}
                 placeholder="0"
               />
               <Button
                 onClick={quickSave}
                 variant="success"
-                size="md"
+                size="sm"
                 disabled={loading}
-                className="min-w-[80px]"
+                className="min-w-[70px] sm:min-w-[80px] text-xs sm:text-sm py-1.5 sm:py-2"
               >
                 Save
               </Button>
             </div>
             
-            <div className="grid grid-cols-5 gap-2">
+            <div className="grid grid-cols-5 gap-1.5 sm:gap-2">
               <Button
                 onClick={() => addRuns(1)}
                 variant="primary"
                 size="lg"
-                className="text-lg font-bold py-4 min-h-[56px]"
+                className="text-sm sm:text-lg font-bold py-2 sm:py-4 min-h-[44px] sm:min-h-[56px]"
               >
                 +1
               </Button>
@@ -323,7 +323,7 @@ export default function Config() {
                 onClick={() => addRuns(2)}
                 variant="primary"
                 size="lg"
-                className="text-lg font-bold py-4 min-h-[56px]"
+                className="text-sm sm:text-lg font-bold py-2 sm:py-4 min-h-[44px] sm:min-h-[56px]"
               >
                 +2
               </Button>
@@ -331,7 +331,7 @@ export default function Config() {
                 onClick={() => addRuns(3)}
                 variant="primary"
                 size="lg"
-                className="text-lg font-bold py-4 min-h-[56px]"
+                className="text-sm sm:text-lg font-bold py-2 sm:py-4 min-h-[44px] sm:min-h-[56px]"
               >
                 +3
               </Button>
@@ -339,7 +339,7 @@ export default function Config() {
                 onClick={() => addRuns(4)}
                 variant="primary"
                 size="lg"
-                className="text-lg font-bold py-4 min-h-[56px]"
+                className="text-sm sm:text-lg font-bold py-2 sm:py-4 min-h-[44px] sm:min-h-[56px]"
               >
                 +4
               </Button>
@@ -347,7 +347,7 @@ export default function Config() {
                 onClick={() => addRuns(6)}
                 variant="primary"
                 size="lg"
-                className="text-lg font-bold py-4 min-h-[56px]"
+                className="text-sm sm:text-lg font-bold py-2 sm:py-4 min-h-[44px] sm:min-h-[56px]"
               >
                 +6
               </Button>
@@ -355,14 +355,14 @@ export default function Config() {
           </div>
 
           {/* Quick Actions - Wickets */}
-          <div className="space-y-3 pt-2">
-            <div className="flex items-center gap-2">
-              <span className="text-sm font-medium text-slate-700 flex-1">Wickets: <span className="text-lg font-bold text-alert">{form.wickets ?? 0}</span> / 10</span>
+          <div className="space-y-2 pt-1 sm:pt-2">
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <span className="text-xs sm:text-sm font-medium text-slate-700 flex-1">Wickets: <span className="text-base sm:text-lg font-bold text-alert">{form.wickets ?? 0}</span> / 10</span>
               <input
                 type="number"
                 value={form.wickets ?? ""}
                 onChange={(e) => updateField("wickets", e.target.value === "" ? null : Number(e.target.value))}
-                className="w-24 rounded-md border border-slate-300 px-2 py-2 text-center text-base focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                className="w-20 sm:w-24 rounded-md border border-slate-300 px-1.5 sm:px-2 py-1.5 sm:py-2 text-center text-sm sm:text-base focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
                 min={0}
                 max={10}
                 placeholder="0"
@@ -370,20 +370,20 @@ export default function Config() {
               <Button
                 onClick={quickSave}
                 variant="success"
-                size="md"
+                size="sm"
                 disabled={loading}
-                className="min-w-[80px]"
+                className="min-w-[70px] sm:min-w-[80px] text-xs sm:text-sm py-1.5 sm:py-2"
               >
                 Save
               </Button>
             </div>
             
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
               <Button
                 onClick={addWicket}
                 variant="danger"
                 size="lg"
-                className="text-base font-semibold py-4 min-h-[56px]"
+                className="text-xs sm:text-base font-semibold py-2 sm:py-4 min-h-[44px] sm:min-h-[56px]"
               >
                 +1 Wicket
               </Button>
@@ -391,7 +391,7 @@ export default function Config() {
                 onClick={removeWicket}
                 variant="dangerlite"
                 size="lg"
-                className="text-base font-semibold py-4 min-h-[56px]"
+                className="text-xs sm:text-base font-semibold py-2 sm:py-4 min-h-[44px] sm:min-h-[56px]"
               >
                 -1 Wicket
               </Button>
@@ -399,34 +399,34 @@ export default function Config() {
           </div>
 
           {/* Quick Actions - Overs */}
-          <div className="space-y-3 pt-2">
-            <div className="flex items-center gap-2">
-              <span className="text-sm font-medium text-slate-700 flex-1">Overs: <span className="text-lg font-bold text-primary">{formatOvers(form.overs)}</span></span>
+          <div className="space-y-2 pt-1 sm:pt-2">
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <span className="text-xs sm:text-sm font-medium text-slate-700 flex-1">Overs: <span className="text-base sm:text-lg font-bold text-primary">{formatOvers(form.overs)}</span></span>
               <input
                 type="text"
                 value={formatOvers(form.overs)}
                 onChange={(e) => updateField("overs", e.target.value === "" ? null : parseOvers(e.target.value))}
-                className="w-24 rounded-md border border-slate-300 px-2 py-2 text-center text-base focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                className="w-20 sm:w-24 rounded-md border border-slate-300 px-1.5 sm:px-2 py-1.5 sm:py-2 text-center text-sm sm:text-base focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
                 placeholder="0.0"
                 pattern="[0-9]+\\.[0-5]"
               />
               <Button
                 onClick={quickSave}
                 variant="success"
-                size="md"
+                size="sm"
                 disabled={loading}
-                className="min-w-[80px]"
+                className="min-w-[70px] sm:min-w-[80px] text-xs sm:text-sm py-1.5 sm:py-2"
               >
                 Save
               </Button>
             </div>
             
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid grid-cols-3 gap-1 sm:gap-2">
               <Button
                 onClick={() => addBalls(1)}
                 variant="secondary"
                 size="lg"
-                className="text-base font-semibold py-4 min-h-[56px]"
+                className="text-xs sm:text-base font-semibold py-1.5 sm:py-4 min-h-[36px] sm:min-h-[56px]"
               >
                 +1 Ball
               </Button>
@@ -434,7 +434,7 @@ export default function Config() {
                 onClick={() => addBalls(2)}
                 variant="secondary"
                 size="lg"
-                className="text-base font-semibold py-4 min-h-[56px]"
+                className="text-xs sm:text-base font-semibold py-1.5 sm:py-4 min-h-[36px] sm:min-h-[56px]"
               >
                 +2 Balls
               </Button>
@@ -442,18 +442,18 @@ export default function Config() {
                 onClick={() => addBalls(6)}
                 variant="primarylite"
                 size="lg"
-                className="text-base font-semibold py-4 min-h-[56px]"
+                className="text-xs sm:text-base font-semibold py-1.5 sm:py-4 min-h-[36px] sm:min-h-[56px]"
               >
                 +1 Over
               </Button>
             </div>
             
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid grid-cols-3 gap-1 sm:gap-2">
               <Button
                 onClick={() => addBalls(3)}
                 variant="secondary"
                 size="lg"
-                className="text-base font-semibold py-4 min-h-[56px]"
+                className="text-xs sm:text-base font-semibold py-1.5 sm:py-4 min-h-[36px] sm:min-h-[56px]"
               >
                 +3 Balls
               </Button>
@@ -461,7 +461,7 @@ export default function Config() {
                 onClick={() => addBalls(4)}
                 variant="secondary"
                 size="lg"
-                className="text-base font-semibold py-4 min-h-[56px]"
+                className="text-xs sm:text-base font-semibold py-1.5 sm:py-4 min-h-[36px] sm:min-h-[56px]"
               >
                 +4 Balls
               </Button>
@@ -469,20 +469,20 @@ export default function Config() {
                 onClick={() => addBalls(5)}
                 variant="secondary"
                 size="lg"
-                className="text-base font-semibold py-4 min-h-[56px]"
+                className="text-xs sm:text-base font-semibold py-1.5 sm:py-4 min-h-[36px] sm:min-h-[56px]"
               >
                 +5 Balls
               </Button>
             </div>
 
             {/* Subtract Balls Section */}
-            <div className="pt-2 border-t border-slate-200">
-              <div className="grid grid-cols-3 gap-2 mb-2">
+            <div className="pt-1 sm:pt-2 border-t border-slate-200">
+              <div className="grid grid-cols-3 gap-1 sm:gap-2 mb-1 sm:mb-2">
                 <Button
                   onClick={() => removeBalls(1)}
                   variant="dangerlite"
                   size="lg"
-                  className="text-base font-semibold py-4 min-h-[56px]"
+                  className="text-xs sm:text-base font-semibold py-1.5 sm:py-4 min-h-[36px] sm:min-h-[56px]"
                 >
                   -1 Ball
                 </Button>
@@ -490,7 +490,7 @@ export default function Config() {
                   onClick={() => removeBalls(2)}
                   variant="dangerlite"
                   size="lg"
-                  className="text-base font-semibold py-4 min-h-[56px]"
+                  className="text-xs sm:text-base font-semibold py-1.5 sm:py-4 min-h-[36px] sm:min-h-[56px]"
                 >
                   -2 Balls
                 </Button>
@@ -498,18 +498,18 @@ export default function Config() {
                   onClick={() => removeBalls(6)}
                   variant="danger"
                   size="lg"
-                  className="text-base font-semibold py-4 min-h-[56px]"
+                  className="text-xs sm:text-base font-semibold py-1.5 sm:py-4 min-h-[36px] sm:min-h-[56px]"
                 >
                   -1 Over
                 </Button>
               </div>
               
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-3 gap-1 sm:gap-2">
                 <Button
                   onClick={() => removeBalls(3)}
                   variant="dangerlite"
                   size="lg"
-                  className="text-base font-semibold py-4 min-h-[56px]"
+                  className="text-xs sm:text-base font-semibold py-1.5 sm:py-4 min-h-[36px] sm:min-h-[56px]"
                 >
                   -3 Balls
                 </Button>
@@ -517,7 +517,7 @@ export default function Config() {
                   onClick={() => removeBalls(4)}
                   variant="dangerlite"
                   size="lg"
-                  className="text-base font-semibold py-4 min-h-[56px]"
+                  className="text-xs sm:text-base font-semibold py-1.5 sm:py-4 min-h-[36px] sm:min-h-[56px]"
                 >
                   -4 Balls
                 </Button>
@@ -525,7 +525,7 @@ export default function Config() {
                   onClick={() => removeBalls(5)}
                   variant="dangerlite"
                   size="lg"
-                  className="text-base font-semibold py-4 min-h-[56px]"
+                  className="text-xs sm:text-base font-semibold py-1.5 sm:py-4 min-h-[36px] sm:min-h-[56px]"
                 >
                   -5 Balls
                 </Button>
